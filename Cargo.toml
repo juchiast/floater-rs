@@ -4,3 +4,11 @@ version = "0.1.0"
 authors = ["Do Duy <juchiast@gmail.com>"]
 
 [dependencies]
+stdweb = "0.4.4"
+yew = { git = "https://github.com/DenisKolodin/yew", rev = "8267b3a" }
+
+[profile.release]
+lto = true
+codegen-units = 1
+panic = "abort"
+opt-level = "z"

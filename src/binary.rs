@@ -1,4 +1,4 @@
-use std::mem;
+use std::{fmt, mem};
 
 #[derive(Debug)]
 pub struct Dumped {
@@ -7,11 +7,12 @@ pub struct Dumped {
     pub val: String,
     pub exp_biased: i32,
     pub exp: i32,
+    pub value: String,
 }
 
 pub trait Binaryer
 where
-    Self: Sized,
+    Self: Sized + fmt::LowerExp,
 {
     const EXP_SIZE: usize;
     const BIT_SIZE: usize = mem::size_of::<Self>() * 8;
@@ -33,6 +34,7 @@ where
             val: s[(1 + Self::EXP_SIZE)..].iter().collect::<String>(),
             exp_biased: exp_val,
             exp: exp_val - Self::bias(),
+            value: format!("{:e}", self),
         }
     }
 

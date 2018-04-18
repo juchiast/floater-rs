@@ -1,7 +1,15 @@
-mod binary;
+#![recursion_limit = "128"]
 
-use binary::*;
+extern crate stdweb;
+#[macro_use]
+extern crate yew;
+
+mod binary;
+mod builder;
+mod dumper;
 
 fn main() {
-    println!("{:e}", f64::build("000000000000000000000000000000000001").unwrap());
+    yew::initialize();
+    dumper::Model::mount();
+    yew::run_loop();
 }
