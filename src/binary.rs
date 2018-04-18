@@ -40,14 +40,14 @@ where
 
     fn build(bits: &str) -> Result<Self, &'static str> {
         let bits = bits.trim();
-        if bits.chars().count() > Self::BIT_SIZE {
-            Err("Invalid input length")
-        } else if bits.chars().any(|c| c != '0' && c != '1') {
+        let iter = bits.chars().filter(|c| !c.is_whitespace());
+        if iter.clone().count() > Self::BIT_SIZE {
+            Err("Input is too long")
+        } else if iter.clone().any(|c| c != '0' && c != '1') {
             Err("Invalid character in input")
         } else {
             let mut result = unsafe { mem::zeroed::<Self>() };
-            bits.chars()
-                .enumerate()
+            iter.enumerate()
                 .filter(|&(_, c)| c == '1')
                 .for_each(|(i, _)| result.set_bit(Self::BIT_SIZE - 1 - i));
             Ok(result)
