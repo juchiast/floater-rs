@@ -1,5 +1,3 @@
-#![recursion_limit = "128"]
-
 extern crate stdweb;
 #[macro_use]
 extern crate yew;
@@ -10,6 +8,6 @@ mod dumper;
 
 fn main() {
     yew::initialize();
-    dumper::Model::mount();
+    dumper::mount();
     yew::run_loop();
 }
