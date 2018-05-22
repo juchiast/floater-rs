@@ -7,16 +7,11 @@
 // except according to those terms.
 
 use binary::*;
+use select::*;
 use stdweb::web::{document, IParentNode};
 use yew::prelude::*;
 
 type Context = ();
-
-#[derive(PartialEq, Clone, Copy)]
-enum FloatType {
-    Single,
-    Double,
-}
 
 enum Mess {
     Input(String),
@@ -29,17 +24,17 @@ struct Model {
 }
 
 impl Component<Context> for Model {
-    type Msg = Mess;
+    type Message = Mess;
     type Properties = ();
 
     fn create(_: Self::Properties, _: &mut Env<Context, Self>) -> Self {
         Model {
             input: String::new(),
-            float_type: FloatType::Single,
+            float_type: SINGLE_PRECISION,
         }
     }
 
-    fn update(&mut self, msg: Self::Msg, _: &mut Env<Context, Self>) -> ShouldRender {
+    fn update(&mut self, msg: Self::Message, _: &mut Env<Context, Self>) -> ShouldRender {
         match msg {
             Mess::Input(s) => self.input = s,
             Mess::Type(t) => self.float_type = t,
@@ -66,35 +61,29 @@ impl Model {
             Err("Input is empty!")
         } else {
             match self.float_type {
-                FloatType::Single => match f32::from_str(&self.input) {
+                SINGLE_PRECISION => match f32::from_str(&self.input) {
                     Err(_) => Err("Input is invalid!"),
                     Ok(f) => Ok(f.dump()),
                 },
-                FloatType::Double => match f64::from_str(&self.input) {
+                DOUBLE_PRECISION => match f64::from_str(&self.input) {
                     Err(_) => Err("Input is invalid!"),
                     Ok(f) => Ok(f.dump()),
                 },
+                _ => panic!(),
             }
         }
     }
 
     fn view_control(&self) -> Html<Context, Self> {
-        let option = |t, s| {
-            if t == self.float_type {
-                html! { <option onclick=move |_| Mess::Type(t), selected=1,>{ s }</option> }
-            } else {
-                html! { <option onclick=move |_| Mess::Type(t),>{ s }</option> }
-            }
-        };
+        static OPTIONS: &[(FloatType, &str)] = &[
+            (SINGLE_PRECISION, "Single-precision"),
+            (DOUBLE_PRECISION, "Double-precision"),
+        ];
         html! {
             <div class="form-row",>
             <div class="col-sm-auto",>
                 <div class="form-group",>
-                <label for="dumper-type",>{ "Floating-point format:" }</label>
-                <select class="form-control", id="dumper-type",>
-                { option(FloatType::Single, "Single-precision") }
-                { option(FloatType::Double, "Double-precision") }
-                </select>
+                { make_select("dumper-type", "Floating-point format:", OPTIONS, Mess::Type, self.float_type) }
                 </div>
             </div>
             <div class="col-sm",>
@@ -110,8 +99,10 @@ impl Model {
         }
     }
     fn view_result(&self) -> Html<Context, Self> {
-        let row = |label, value| html! {
-            <tr><td><strong>{label}</strong></td><td style="font-family:monospace",>{value}</td></tr>
+        let row = |label, value| {
+            html! {
+                <tr><td><strong>{label}</strong></td><td style="font-family:monospace",>{value}</td></tr>
+            }
         };
         match self.get_dump() {
             Err(s) => html! {

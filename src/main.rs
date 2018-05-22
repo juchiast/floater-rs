@@ -13,6 +13,7 @@ extern crate yew;
 mod binary;
 mod builder;
 mod dumper;
+mod select;
 
 fn main() {
     yew::initialize();
