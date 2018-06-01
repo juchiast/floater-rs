@@ -82,7 +82,7 @@ name = "floater"
 version = "0.1.0"
 dependencies = [
  "stdweb 0.4.6 (registry+https://github.com/rust-lang/crates.io-index)",
- "yew 0.4.0 (git+https://github.com/DenisKolodin/yew?rev=92be47d)",
+ "yew 0.4.0 (git+https://github.com/DenisKolodin/yew?rev=f392d7e)",
 ]
 
 [[package]]
@@ -329,7 +329,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 [[package]]
 name = "yew"
 version = "0.4.0"
-source = "git+https://github.com/DenisKolodin/yew?rev=92be47d#92be47d99a00621327d4f3d5d87ab0866e287468"
+source = "git+https://github.com/DenisKolodin/yew?rev=f392d7e#f392d7ef8b4445f7acad880bc769803aa655cfea"
 dependencies = [
  "failure 0.1.1 (registry+https://github.com/rust-lang/crates.io-index)",
  "http 0.1.5 (registry+https://github.com/rust-lang/crates.io-index)",
@@ -382,4 +382,4 @@ dependencies = [
 "checksum winapi 0.3.4 (registry+https://github.com/rust-lang/crates.io-index)" = "04e3bd221fcbe8a271359c04f21a76db7d0c6028862d1bb5512d85e1e2eb5bb3"
 "checksum winapi-i686-pc-windows-gnu 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)" = "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
 "checksum winapi-x86_64-pc-windows-gnu 0.4.0 (registry+https://github.com/rust-lang/crates.io-index)" = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
-"checksum yew 0.4.0 (git+https://github.com/DenisKolodin/yew?rev=92be47d)" = "<none>"
+"checksum yew 0.4.0 (git+https://github.com/DenisKolodin/yew?rev=f392d7e)" = "<none>"

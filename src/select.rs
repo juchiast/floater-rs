@@ -1,5 +1,4 @@
 use std;
-use stdweb::web::IElement;
 use yew::prelude::*;
 
 pub type FloatType = u32;
@@ -14,31 +13,21 @@ where
     S: Component<C> + Renderable<C, S>,
     C: 'static,
 {
-    let value = move |cd: ChangeData| match cd {
-        ChangeData::Select(se) => {
-            let options = se.selected_options();
-            assert_eq!(options.len(), 1);
-            f(options
-                .item(0)
-                .unwrap()
-                .get_attribute("value_")
-                .unwrap()
-                .parse()
-                .unwrap())
-        }
+    let value = move |cd| match cd {
+        ChangeData::Select(se) => f(se.raw_value().parse().unwrap()),
         _ => unreachable!(),
     };
     let iter = v.iter().map(|(v, s)| {
         if cur == *v {
-            html! {<option value_={v}, selected=1,>{s}</option>}
+            html! {<option value={v}, selected=1,>{s}</option>}
         } else {
-            html! {<option value_={v},>{s}</option>}
+            html! {<option value={v},>{s}</option>}
         }
     });
     html! {
         <>
         <label for={id}, >{ title }</label>
-        <select id={id}, class="form-control", onchange={ value }, >
+        <select id={id}, class="form-control", onchange=|e| value(e), >
             { for iter }
         </select>
         </>

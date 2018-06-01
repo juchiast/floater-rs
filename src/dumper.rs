@@ -92,7 +92,7 @@ impl Model {
                 <input type="text",
                        class="form-control",
                        id="dumper-input",
-                       oninput=|e: InputData| Mess::Input(e.value), />
+                       oninput=|e| Mess::Input(e.value), />
                 </div>
             </div>
             </div>
