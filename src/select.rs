@@ -5,13 +5,12 @@ pub type FloatType = u32;
 pub const SINGLE_PRECISION: FloatType = 0;
 pub const DOUBLE_PRECISION: FloatType = 1;
 
-pub fn make_select<V, F, C, S>(id: &str, title: &str, v: &[(V, &str)], f: F, cur: V) -> Html<C, S>
+pub fn make_select<V, F, S>(id: &str, title: &str, v: &[(V, &str)], f: F, cur: V) -> Html<S>
 where
     V: std::fmt::Display + std::str::FromStr + PartialEq,
     <V as std::str::FromStr>::Err: std::fmt::Debug,
-    F: 'static + Fn(V) -> <S as Component<C>>::Message,
-    S: Component<C> + Renderable<C, S>,
-    C: 'static,
+    F: 'static + Fn(V) -> <S as Component>::Message,
+    S: Component + Renderable<S>,
 {
     let value = move |cd| match cd {
         ChangeData::Select(se) => f(se.raw_value().parse().unwrap()),

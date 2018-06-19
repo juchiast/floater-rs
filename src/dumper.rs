@@ -11,8 +11,6 @@ use select::*;
 use stdweb::web::{document, IParentNode};
 use yew::prelude::*;
 
-type Context = ();
-
 enum Mess {
     Input(String),
     Type(FloatType),
@@ -23,18 +21,18 @@ struct Model {
     float_type: FloatType,
 }
 
-impl Component<Context> for Model {
+impl Component for Model {
     type Message = Mess;
     type Properties = ();
 
-    fn create(_: Self::Properties, _: &mut Env<Context, Self>) -> Self {
+    fn create(_: Self::Properties, _: ComponentLink<Self>) -> Self {
         Model {
             input: String::new(),
             float_type: SINGLE_PRECISION,
         }
     }
 
-    fn update(&mut self, msg: Self::Message, _: &mut Env<Context, Self>) -> ShouldRender {
+    fn update(&mut self, msg: Self::Message) -> ShouldRender {
         match msg {
             Mess::Input(s) => self.input = s,
             Mess::Type(t) => self.float_type = t,
@@ -43,8 +41,8 @@ impl Component<Context> for Model {
     }
 }
 
-impl Renderable<Context, Model> for Model {
-    fn view(&self) -> Html<Context, Self> {
+impl Renderable<Model> for Model {
+    fn view(&self) -> Html<Self> {
         html! {
             <>
             { self.view_control() }
@@ -74,7 +72,7 @@ impl Model {
         }
     }
 
-    fn view_control(&self) -> Html<Context, Self> {
+    fn view_control(&self) -> Html<Self> {
         static OPTIONS: &[(FloatType, &str)] = &[
             (SINGLE_PRECISION, "Single-precision"),
             (DOUBLE_PRECISION, "Double-precision"),
@@ -98,7 +96,7 @@ impl Model {
             </div>
         }
     }
-    fn view_result(&self) -> Html<Context, Self> {
+    fn view_result(&self) -> Html<Self> {
         let row = |label, value| {
             html! {
                 <tr><td><strong>{label}</strong></td><td style="font-family:monospace",>{value}</td></tr>
@@ -121,7 +119,7 @@ impl Model {
 }
 
 pub fn mount() {
-    let app: App<_, Model> = App::new(());
+    let app: App<Model> = App::new();
     let element = document().query_selector("#app-dumper").unwrap().unwrap();
     app.mount(element);
 }
