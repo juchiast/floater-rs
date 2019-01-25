@@ -6,12 +6,12 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-use binary::*;
-use select::*;
+use crate::binary::*;
+use crate::select::*;
 use stdweb::web::{document, IParentNode};
 use yew::prelude::*;
 
-enum Mess {
+enum Msg {
     Input(String),
     Type(FloatType),
 }
@@ -22,7 +22,7 @@ struct Model {
 }
 
 impl Component for Model {
-    type Message = Mess;
+    type Message = Msg;
     type Properties = ();
 
     fn create(_: Self::Properties, _: ComponentLink<Self>) -> Self {
@@ -34,8 +34,8 @@ impl Component for Model {
 
     fn update(&mut self, msg: Self::Message) -> ShouldRender {
         match msg {
-            Mess::Input(s) => self.input = s,
-            Mess::Type(t) => self.float_type = t,
+            Msg::Input(s) => self.input = s,
+            Msg::Type(t) => self.float_type = t,
         }
         true
     }
@@ -62,7 +62,7 @@ impl Model {
             <div class="form-row",>
             <div class="col-sm-auto",>
                 <div class="form-group",>
-                { make_select("builder-type", "Floating-point format:", OPTIONS, Mess::Type, self.float_type) }
+                { make_select("builder-type", "Floating-point format:", OPTIONS, Msg::Type, self.float_type) }
                 </div>
             </div>
             <div class="col-sm",>
@@ -71,7 +71,7 @@ impl Model {
                 <input type="text",
                        class="form-control",
                        id="builder-input",
-                       oninput=|e| Mess::Input(e.value), />
+                       oninput=|e| Msg::Input(e.value), />
                 </div>
             </div>
             </div>

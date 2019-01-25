@@ -34,7 +34,7 @@ where
             .rev()
             .map(|i| self.get_bit(i))
             .collect::<Vec<_>>();
-        let exp = s[1..(1 + Self::EXP_SIZE)].iter().collect::<String>();
+        let exp = s[1..=Self::EXP_SIZE].iter().collect::<String>();
         let exp_val = i32::from_str_radix(&exp, 2).unwrap();
         Dumped {
             sign: s[0],

@@ -1,4 +1,3 @@
-use std;
 use yew::prelude::*;
 
 pub type FloatType = u32;
@@ -16,13 +15,9 @@ where
         ChangeData::Select(se) => f(se.raw_value().parse().unwrap()),
         _ => unreachable!(),
     };
-    let iter = v.iter().map(|(v, s)| {
-        if cur == *v {
-            html! {<option value={v}, selected=1,>{s}</option>}
-        } else {
-            html! {<option value={v},>{s}</option>}
-        }
-    });
+    let iter = v
+        .iter()
+        .map(|(v, s)| html! {<option value={v}, selected=cur == *v,>{s}</option>});
     html! {
         <>
         <label for={id}, >{ title }</label>

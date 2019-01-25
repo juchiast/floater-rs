@@ -12,11 +12,6 @@ using [cargo-web](https://github.com/koute/cargo-web), then served in the browse
 
 You can use the app here: https://vietcodes.github.io/tools/floater
 
-There is also a pre-built image in `./dist`, all you have to do is serve the `./dist` directory
-using `http-server` or similar tools.
-
-**Note:** These files must be served by a web server, simply open `index.html` doesn't work.
-
 ## Build
 
 Prepare the build environment:
@@ -26,9 +21,7 @@ Prepare the build environment:
 - Install the `wasm32-unknown-unknown` target: `rustup target add wasm32-unknown-unknown`
 - Install `cargo-web`: `cargo install cargo-web`
 
-To build, run `make`, which does the following things:
-- `cargo web build`
-- Copy output files to `./dist`
+To build, run `cargo web start`.
 
 ## License
 
