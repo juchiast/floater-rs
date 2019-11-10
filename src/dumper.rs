@@ -76,18 +76,18 @@ impl Model {
             (DOUBLE_PRECISION, "Double-precision"),
         ];
         html! {
-            <div class="form-row",>
-            <div class="col-sm-auto",>
-                <div class="form-group",>
+            <div class="form-row">
+            <div class="col-sm-auto">
+                <div class="form-group">
                 { make_select("dumper-type", "Floating-point format:", OPTIONS, Msg::Type, self.float_type) }
                 </div>
             </div>
-            <div class="col-sm",>
-                <div class="form-group",>
-                <label for="dumper-input",>{ "Input:" }</label>
-                <input type="text",
-                       class="form-control",
-                       id="dumper-input",
+            <div class="col-sm">
+                <div class="form-group">
+                <label for="dumper-input">{ "Input:" }</label>
+                <input type="text"
+                       class="form-control"
+                       id="dumper-input"
                        oninput=|e| Msg::Input(e.value), />
                 </div>
             </div>
