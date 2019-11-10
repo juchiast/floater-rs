@@ -15,13 +15,13 @@ where
         ChangeData::Select(se) => f(se.raw_value().parse().unwrap()),
         _ => unreachable!(),
     };
-    let iter = v
+    let mut iter = v
         .iter()
-        .map(|(v, s)| html! {<option value={v}, selected=cur == *v,>{s}</option>});
+        .map(|(v, s)| html! {<option value={v} selected=cur == *v>{s}</option>});
     html! {
         <>
-        <label for={id}, >{ title }</label>
-        <select id={id}, class="form-control", onchange=|e| value(e), >
+        <label for={id} >{ title }</label>
+        <select id={id} class="form-control" onchange=|e| value(e), >
             { for iter }
         </select>
         </>

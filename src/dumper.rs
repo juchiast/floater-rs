@@ -39,9 +39,7 @@ impl Component for Model {
         }
         true
     }
-}
 
-impl Renderable<Model> for Model {
     fn view(&self) -> Html<Self> {
         html! {
             <>
@@ -104,7 +102,7 @@ impl Model {
         };
         match self.get_dump() {
             Err(s) => html! {
-                <div class="alert", class="alert-warning",>{s.to_owned()}</div>
+                <div class="alert alert-warning">{s.to_owned()}</div>
             },
             Ok(d) => html! {
                 <table>

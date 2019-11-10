@@ -39,8 +39,18 @@ impl Component for Model {
         }
         true
     }
+
+    fn view(&self) -> Html<Self> {
+        html! {
+            <>
+            { self.view_control() }
+            { self.view_result() }
+            </>
+        }
+    }
 }
 
+/*
 impl Renderable<Model> for Model {
     fn view(&self) -> Html<Self> {
         html! {
@@ -51,6 +61,7 @@ impl Renderable<Model> for Model {
         }
     }
 }
+*/
 
 impl Model {
     fn view_control(&self) -> Html<Self> {
@@ -80,7 +91,7 @@ impl Model {
     fn view_result(&self) -> Html<Self> {
         if self.input.is_empty() {
             return html! {
-                <div class="alert", class="alert-warning",>{"Input is empty!"}</div>
+                <div class="alert alert-warning">{"Input is empty!"}</div>
             };
         }
 
