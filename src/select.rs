@@ -21,7 +21,7 @@ where
     html! {
         <>
         <label for={id} >{ title }</label>
-        <select id={id} class="form-control" onchange=|e| value(e), >
+        <select id={id} class="form-control" onchange=|e| value(e) >
             { for iter }
         </select>
         </>
