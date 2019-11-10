@@ -88,7 +88,7 @@ impl Model {
                 <input type="text"
                        class="form-control"
                        id="dumper-input"
-                       oninput=|e| Msg::Input(e.value), />
+                       oninput=|e| Msg::Input(e.value) />
                 </div>
             </div>
             </div>
@@ -97,7 +97,7 @@ impl Model {
     fn view_result(&self) -> Html<Self> {
         let row = |label, value| {
             html! {
-                <tr><td><strong>{label}</strong></td><td style="font-family:monospace",>{value}</td></tr>
+                <tr><td><strong>{label}</strong></td><td style="font-family:monospace">{value}</td></tr>
             }
         };
         match self.get_dump() {
