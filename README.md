@@ -10,7 +10,7 @@ using [cargo-web](https://github.com/koute/cargo-web), then served in the browse
 
 ## Usage
 
-You can use the app here: https://vietcodes.github.io/tools/floater
+You can use the app here: https://vietcodes.github.io/products/floater
 
 ## Build
 
